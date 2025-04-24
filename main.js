@@ -1,19 +1,13 @@
-// js/include.js
-
-function includeHTML() {
-    const elements = document.querySelectorAll('[data-include]');
-    elements.forEach(el => {
-      const file = el.getAttribute('data-include');
-      if (file) {
-        fetch(file)
-          .then(response => {
-            if (!response.ok) throw new Error(`Could not load ${file}`);
-            return response.text();
-          })
-          .then(data => el.innerHTML = data)
-          .catch(err => console.error(err));
-      }
+window.addEventListener("DOMContentLoaded", () => {
+  fetch("header.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("header").innerHTML = data;
     });
-  }
-  
-  document.addEventListener('DOMContentLoaded', includeHTML);
+
+  fetch("footer.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("footer").innerHTML = data;
+    });
+});
